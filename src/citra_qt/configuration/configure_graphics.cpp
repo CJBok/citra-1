@@ -19,6 +19,9 @@ ConfigureGraphics::ConfigureGraphics(QWidget* parent)
 
     ui->layoutBox->setEnabled(!Settings::values.custom_layout);
 
+    ui->AddTicks->setEnabled(Settings::values.FMV_hack);
+    connect(ui->FMV_hack, &QCheckBox::toggled, ui->AddTicks, &QWidget::setEnabled);
+
     ui->hw_renderer_group->setEnabled(ui->toggle_hw_renderer->isChecked());
     connect(ui->toggle_hw_renderer, &QCheckBox::toggled, ui->hw_renderer_group,
             &QWidget::setEnabled);
@@ -65,6 +68,8 @@ void ConfigureGraphics::SetConfiguration() {
     ui->factor_3d->setValue(Settings::values.factor_3d);
     updateShaders(Settings::values.render_3d == Settings::StereoRenderOption::Anaglyph);
     ui->toggle_linear_filter->setChecked(Settings::values.filter_mode);
+    ui->FMV_hack->setChecked(Settings::values.FMV_hack);
+    ui->AddTicks->setValue(Settings::values.AddTicks);
     ui->layout_combobox->setCurrentIndex(static_cast<int>(Settings::values.layout_option));
     ui->swap_screen->setChecked(Settings::values.swap_screen);
     UpdateBackgroundColorButton(QColor::fromRgbF(Settings::values.bg_red, Settings::values.bg_green,
@@ -84,6 +89,8 @@ void ConfigureGraphics::ApplyConfiguration() {
     Settings::values.pp_shader_name =
         ui->shader_combobox->itemText(ui->shader_combobox->currentIndex()).toStdString();
     Settings::values.filter_mode = ui->toggle_linear_filter->isChecked();
+    Settings::values.FMV_hack = ui->FMV_hack->isChecked();
+    Settings::values.AddTicks = ui->AddTicks->value();
     Settings::values.layout_option =
         static_cast<Settings::LayoutOption>(ui->layout_combobox->currentIndex());
     Settings::values.swap_screen = ui->swap_screen->isChecked();
