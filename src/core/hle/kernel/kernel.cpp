@@ -22,7 +22,7 @@ KernelSystem::KernelSystem(Memory::MemorySystem& memory, Core::Timing& timing,
                            u32 num_cores)
     : memory(memory), timing(timing),
       prepare_reschedule_callback(std::move(prepare_reschedule_callback)) {
-    MemoryInit(system_mode);
+    MemoryInit(system_mode = 6);
 
     resource_limits = std::make_unique<ResourceLimitList>(*this);
     for (u32 core_id = 0; core_id < num_cores; ++core_id) {
