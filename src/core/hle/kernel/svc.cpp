@@ -904,7 +904,6 @@ ResultCode SVC::CreateThread(Handle* out_handle, u32 entry_point, u32 arg, VAddr
         // 0xD9001BEA is returned. These are the only restriction checks done by the kernel for
         // processorid.
         break;
-    case ThreadProcessorId2:
         LOG_ERROR(Kernel_SVC,
                   "Newly created thread must run in the SysCore (Core2), unimplemented.");
         break;
