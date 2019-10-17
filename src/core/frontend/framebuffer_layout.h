@@ -43,6 +43,15 @@ FramebufferLayout DefaultFrameLayout(u32 width, u32 height, bool is_swapped);
 FramebufferLayout SingleFrameLayout(u32 width, u32 height, bool is_swapped);
 
 /**
+ * Factory method for constructing a FramebufferLayout with only the top or bottom screen
+ * @param width Window framebuffer width in pixels
+ * @param height Window framebuffer height in pixels
+ * @param is_swapped if true, the bottom screen will be displayed (and the top won't be displayed)
+ * @return Newly created FramebufferLayout object with default screen regions initialized
+ */
+FramebufferLayout MediumFrameLayout(unsigned width, unsigned height, bool is_swapped);
+
+/**
  * Factory method for constructing a Frame with the a 4x size Top screen with a 1x size bottom
  * screen on the right
  * This is useful in particular because it matches well with a 1920x1080 resolution monitor
